@@ -49,9 +49,8 @@ def search():
     return render_template("games.html", data=data)
 
 
-@app.route("/")
 @app.route("/get_reviews")
-def get_tasks():
+def get_reviews():
     '''Shows list of reviews from Mongodb'''
     reviews = mongo.db.reviews.find()
     return render_template("reviews.html", reviews=reviews)
