@@ -1,5 +1,5 @@
-html {
-    margin: 0;
-    padding: 0;
-    background-color: #2f3437;
-}
+$(document).ready(function(){
+    $('.sidenav').sidenav({
+        outDuration: "400",
+        inDuration: "400"});
+  });
