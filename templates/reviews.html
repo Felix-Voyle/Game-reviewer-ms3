@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+  
+    {% for review in reviews|reverse %}
+     {{ review.game_name }}
+            
+    {% endfor %}
+
+{% endblock %}

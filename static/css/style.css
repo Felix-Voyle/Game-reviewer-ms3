@@ -1,0 +1,60 @@
+html {
+    margin: 0;
+    padding: 0;
+    background-color: #2f3437;
+}
+
+/* nav bar */
+.brand-name {
+    font-size: 2.3rem;
+    line-height: 50px;
+    margin:0 0 1.68rem 0;
+}
+
+.brand-name-game {
+    letter-spacing: 1.2px;
+    color: #ff7073;
+}
+
+.brand-name-r {
+    color: #ff7073;
+}
+
+.brand-name-review {
+    color: #28aee1;
+    border: 2px solid whitesmoke;
+}
+
+nav .nav-wrapper {
+    background-color: #666666;
+}
+
+@media screen and (min-width: 600px) {
+    .brand-name {
+        line-height: 60px;
+    }
+}
+
+/* flash messages */
+.flashes h4 {
+    line-height: 2;
+    margin-top: 50px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+}
+
+.error-msg {
+    background-color: #ff7073;
+}
+
+.success-msg {
+    background-color: #64ffda;
+}
+
+/* register */
+
+.register-card {
+    padding: 10px;
+}
