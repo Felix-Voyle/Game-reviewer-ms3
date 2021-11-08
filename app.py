@@ -132,10 +132,6 @@ def signout():
 
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
-    username = mongo.db.reviews.find_one(
-        {"user": session["user"]})["user"]
-    game = mongo.db.reviews.find_one(
-        {"game_name": request.form.get("game_name")})["game_name"]
     if request.method == "POST":
         review = {
             "game_name": request.form.get("game_name"),
