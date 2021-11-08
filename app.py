@@ -33,6 +33,21 @@ def get_games():
     return render_template("games.html", data=data)
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    '''Allows user to search games using the rawg API as the database'''
+    query = request.form.get("query")
+    print(query)
+    parameters = {
+        "page_size": 15,
+        "search": f"{query}"
+    }
+
+    response = requests.get(f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
+    data = response.json()
+
+    return render_template("games.html", data=data)
+
 
 @app.route("/")
 @app.route("/get_reviews")
