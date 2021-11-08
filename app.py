@@ -20,6 +20,7 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_reviews")
 def get_tasks():
+    '''Shows list of reviews from Mongodb'''
     reviews = mongo.db.reviews.find()
     return render_template("reviews.html", reviews=reviews)
 

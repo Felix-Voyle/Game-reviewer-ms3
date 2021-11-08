@@ -12,9 +12,35 @@
     {% endblock %}
     <title>GAMEReview</title>
 </head>
-
-<body>
-
+  <body>
+    <!--Main navigation bar-->
+    <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">
+            <h1 class="brand-name"><span class="brand-name-game">GAME</span><span class="brand-name-review"><span class="brand-name-r">R</span>eview</span></h1>
+          </a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Reviews</a></li>
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Sign out</a></li>
+              <li><a href="#">Register</a></li>
+              <li><a href="#">Sign in</a></li>
+          </ul>
+            
+          </ul>
+        </div>
+      </nav>
+    <!--Mobile navigation side menu-->
+      <ul class="sidenav" id="mobile-demo">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Reviews</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Sign out</a></li>
+          <li><a href="#">Register</a></li>
+          <li><a href="#">Sign in</a></li>
+      </ul>
 
     {% block content %}
     {% endblock %}
