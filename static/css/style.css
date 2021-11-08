@@ -58,3 +58,124 @@ nav .nav-wrapper {
 .register-card {
     padding: 10px;
 }
+
+/* game/home page */
+
+.game-img {
+    width: 100%;
+    filter: opacity(0.25);
+    height: 200px;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+}
+
+.card-content {
+    min-height: 150px;
+}
+
+.card .card-content .card-title {
+    background-color: black;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.collapsible {
+    border: none;
+}
+.collapsible-header {
+    background-color: rgb(84 110 122);
+}
+.collapsible-body {
+    border: none;
+    padding-bottom: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.review-btn, .buy-btn {
+  box-shadow: 0 2px 0;
+  padding: 0.5em 0.5em;
+  text-decoration: none;
+  border-radius: 10px;
+  height: 35px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+
+.review-btn {
+    background-color: #28aee1;
+    margin-right: 10px;
+    border: none;
+    bottom: -12px;
+}
+.review-btn:hover {
+    cursor: pointer;
+    background-color: #15536b;
+}
+
+.buy-btn {
+    background-color: #ff7073;
+    left: 50%;
+    top: -8px;
+}
+.buy-btn:hover {
+    cursor: pointer;
+    background-color: #5a292a;
+}
+
+.review-txt {
+    width: 100%;
+    min-height: 75px;
+    height: fit-content;
+    background-color: whitesmoke;
+}
+
+.hidden-input {
+    display: none;
+}
+
+select {
+    display: block;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+    color: rgb(214, 214, 214);
+    margin-right: 0;
+}
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
+    color: white;
+}
+
+.rating-card-info {
+    position: absolute;
+    left: 250px;
+    background-color: #ff7073;
+    height: 40px;
+    width: 40px;
+    font-size: 27px;
+    border-radius: 19px;
+    text-align: center;
+}
+
+.user-card-info {
+    position: absolute;
+    top: 10;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    text-align: center;
+}
+
+@media screen and (min-width: 1219px) {
+    .game-img {
+        height: 164px;
+    }
+}
+
+.search-bar {
+    background-color: #2f3437;
+}

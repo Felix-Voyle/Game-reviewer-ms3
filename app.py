@@ -1,4 +1,5 @@
 import os
+import requests
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -14,8 +15,23 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
+API_KEY = os.environ.get("API_KEY")
 
 mongo = PyMongo(app)
+
+@app.route("/")
+@app.route("/get_games")
+def get_games():
+    '''Home page, gets 15 results from rawg API and uses Jinja to display each'''
+    parameters = {
+        "page_size": 12
+    }
+    response = requests.get(f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
+    data = response.json()
+
+
+    return render_template("games.html", data=data)
+
 
 
 @app.route("/")
