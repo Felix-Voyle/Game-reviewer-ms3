@@ -25,6 +25,36 @@ def get_tasks():
     return render_template("reviews.html", reviews=reviews)
 
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    '''Checks if password matches, if it does registers new user if they dont already exist'''
+    if request.form.get("password") == request.form.get("confirm-password"):
+        #check if password matches
+        if request.method == "POST":
+            #check if username exists
+            existing_user = mongo.db.users.find_one(
+                {"username": request.form.get("username").lower()})
+
+            if existing_user:
+                flash("Username already exists", 'error-msg')
+                return redirect (url_for("register"))
+
+            new_user = {
+                "username": request.form.get("username").lower(),
+                "password": generate_password_hash(request.form.get("password"))
+            }
+            mongo.db.users.insert_one(new_user)
+
+            # put new user into 'session' cookie
+            session["user"] = request.form.get("username").lower()
+            flash("Registration Successful", 'success-msg')
+            return redirect(url_for("profile", username=session["user"]))
+        return render_template("register.html")
+
+    flash("Passwords don't match", 'error-msg')
+    return render_template("register.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
