@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAMEReview</title>
-</head>
-<body>
-    {% for review in reviews %}
-      {{ review.game_name }}
+{% extends "base.html" %}
+{% block content %}
+  
+    {% for review in reviews|reverse %}
+     {{ review.game_name }}
+            
     {% endfor %}
-</body>
-</html>
+
+{% endblock %}
