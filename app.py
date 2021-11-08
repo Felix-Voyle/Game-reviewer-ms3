@@ -130,6 +130,28 @@ def signout():
     return redirect(url_for("signin"))
 
 
+@app.route("/add_review", methods=["GET", "POST"])
+def add_review():
+    username = mongo.db.reviews.find_one(
+        {"user": session["user"]})["user"]
+    game = mongo.db.reviews.find_one(
+        {"game_name": request.form.get("game_name")})["game_name"]
+    if request.method == "POST":
+        review = {
+            "game_name": request.form.get("game_name"),
+            "game_rating": request.form.get("rating"),
+            "game_img": request.form.get("game_img"),
+            "user": session["user"],
+            "game_review": request.form.get("review")
+        }
+
+        mongo.db.reviews.insert_one(review)
+        flash("Review added successfully", "success-msg")
+        return redirect(url_for("get_reviews"))
+
+    return render_template("games.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
