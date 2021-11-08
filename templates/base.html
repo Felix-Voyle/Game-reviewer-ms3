@@ -24,7 +24,7 @@
             <li><a href="#">Home</a></li>
             <li><a href="#">Reviews</a></li>
               <li><a href="#">Profile</a></li>
-              <li><a href="#">Sign out</a></li>
+              <li><a href="{{ url_for('signout') }}">Sign out</a></li>
               <li><a href="{{ url_for('register') }}">Register</a></li>
               <li><a href="{{ url_for('signin') }}">Sign in</a></li>
           </ul>
@@ -37,7 +37,7 @@
         <li><a href="#">Home</a></li>
         <li><a href="#">Reviews</a></li>
           <li><a href="#">Profile</a></li>
-          <li><a href="#">Sign out</a></li>
+          <li><a href="{{ url_for('signout') }}">Sign out</a></li>
           <li><a href="{{ url_for('register') }}">Register</a></li>
           <li><a href="{{ url_for('signin') }}">Sign in</a></li>
       </ul>
