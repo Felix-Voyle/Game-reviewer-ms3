@@ -33,10 +33,24 @@ def get_games():
     return render_template("games.html", data=data)
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    '''Allows user to search games using the rawg API as the database'''
+    query = request.form.get("query")
+    print(query)
+    parameters = {
+        "page_size": 15,
+        "search": f"{query}"
+    }
 
-@app.route("/")
+    response = requests.get(f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
+    data = response.json()
+
+    return render_template("games.html", data=data)
+
+
 @app.route("/get_reviews")
-def get_tasks():
+def get_reviews():
     '''Shows list of reviews from Mongodb'''
     reviews = mongo.db.reviews.find()
     return render_template("reviews.html", reviews=reviews)
@@ -114,6 +128,24 @@ def signout():
     flash("You have been logged out", "success-msg")
     session.pop("user")
     return redirect(url_for("signin"))
+
+
+@app.route("/add_review", methods=["GET", "POST"])
+def add_review():
+    if request.method == "POST":
+        review = {
+            "game_name": request.form.get("game_name"),
+            "game_rating": request.form.get("rating"),
+            "game_img": request.form.get("game_img"),
+            "user": session["user"],
+            "game_review": request.form.get("review")
+        }
+
+        mongo.db.reviews.insert_one(review)
+        flash("Review added successfully", "success-msg")
+        return redirect(url_for("get_reviews"))
+
+    return render_template("games.html")
 
 
 if __name__ == "__main__":
