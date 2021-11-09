@@ -1,6 +1,6 @@
 import os
-import requests
 import json
+import requests
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -20,15 +20,16 @@ API_KEY = os.environ.get("API_KEY")
 
 mongo = PyMongo(app)
 
+
 @app.route("/")
 @app.route("/get_games")
 def get_games():
     data = []
-    '''Home page, gets 15 results from rawg API and uses Jinja to display each'''
     parameters = {
         "page_size": 12
     }
-    response = requests.get(f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
+    response = requests.get(
+        f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
     response_data = response.json()
     with open('data.json', 'w') as f:
         json.dump(response_data, f)
@@ -42,14 +43,15 @@ def get_games():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     '''Allows user to search games using the rawg API as the database'''
+    data = []
     query = request.form.get("query")
-    print(query)
     parameters = {
         "page_size": 15,
         "search": f"{query}"
     }
 
-    response = requests.get(f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
+    response = requests.get(
+        f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
     response_data = response.json()
     with open('data.json', 'w') as f:
         json.dump(response_data, f)
@@ -69,21 +71,23 @@ def get_reviews():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    '''Checks if password matches, if it does registers new user if they dont already exist'''
+    '''Checks if password matches, /
+    if it does registers new user if they dont already exist'''
     if request.form.get("password") == request.form.get("confirm-password"):
-        #check if password matches
+        # check if password matches
         if request.method == "POST":
-            #check if username exists
+            # check if username exists
             existing_user = mongo.db.users.find_one(
                 {"username": request.form.get("username").lower()})
 
             if existing_user:
                 flash("Username already exists", 'error-msg')
-                return redirect (url_for("register"))
+                return redirect(url_for("register"))
 
             new_user = {
                 "username": request.form.get("username").lower(),
-                "password": generate_password_hash(request.form.get("password"))
+                "password": generate_password_hash(
+                    request.form.get("password"))
             }
             mongo.db.users.insert_one(new_user)
 
@@ -101,26 +105,26 @@ def register():
 def signin():
     '''function to sign in user if username exists'''
     if request.method == "POST":
-        #check if username exists
+        # check if username exists
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
         if existing_user:
-            #ensure hashed password matches
+            # ensure hashed password matches
             if check_password_hash(
-                existing_user["password"], request.form.get("password")):
+              existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
                 username = request.form.get("username")
-                flash("Welcome, {}".format(request.form.get("username")))
+                flash(f"Welcome, {username}")
                 return redirect(url_for(
                     "profile", username=session["user"]))
             else:
-                #invalid password match
+                # nvalid password match
                 flash("Incorrect Username/Password", 'error-msg')
                 return redirect(url_for("signin"))
 
         else:
-            #username doesn't exist
+            # username doesn't exist
             flash("Incorrect Username/Password", 'error-msg')
     return render_template("signin.html")
 
@@ -130,7 +134,9 @@ def profile(username):
     '''gets session user's username from db'''
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    return render_template("profile.html", username=username)
+    reviews = mongo.db.reviews.find(
+        {"user": session["user"]})
+    return render_template("profile.html", username=username, reviews=reviews)
 
 
 @app.route("/signout")
@@ -143,6 +149,7 @@ def signout():
 
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
+    # adds review to db
     if request.method == "POST":
         review = {
             "game_name": request.form.get("game_name"),
