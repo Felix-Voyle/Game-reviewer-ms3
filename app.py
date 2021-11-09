@@ -30,12 +30,7 @@ def get_games():
     }
     response = requests.get(
         f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
-    response_data = response.json()
-    with open('data.json', 'w') as f:
-        json.dump(response_data, f)
-
-    with open('data.json', 'r') as game_data:
-        data = json.load(game_data)
+    data = response.json()
 
     return render_template("games.html", data=data)
 
@@ -46,18 +41,13 @@ def search():
     data = []
     query = request.form.get("query")
     parameters = {
-        "page_size": 15,
+        "page_size": 12,
         "search": f"{query}"
     }
 
     response = requests.get(
         f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
-    response_data = response.json()
-    with open('data.json', 'w') as f:
-        json.dump(response_data, f)
-
-    with open('data.json', 'r') as game_data:
-        data = json.load(game_data)
+    data = response.json()
 
     return render_template("games.html", data=data)
 
@@ -115,7 +105,7 @@ def signin():
               existing_user["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
                 username = request.form.get("username")
-                flash(f"Welcome, {username}")
+                flash(f"Welcome, {username}", "success-msg")
                 return redirect(url_for(
                     "profile", username=session["user"]))
             else:
