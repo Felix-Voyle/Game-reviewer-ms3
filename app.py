@@ -1,5 +1,6 @@
 import os
 import requests
+import json
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -22,13 +23,18 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_games")
 def get_games():
+    data = []
     '''Home page, gets 15 results from rawg API and uses Jinja to display each'''
     parameters = {
         "page_size": 12
     }
     response = requests.get(f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
-    data = response.json()
+    response_data = response.json()
+    with open('data.json', 'w') as f:
+        json.dump(response_data, f)
 
+    with open('data.json', 'r') as game_data:
+        data = json.load(game_data)
 
     return render_template("games.html", data=data)
 
@@ -44,7 +50,12 @@ def search():
     }
 
     response = requests.get(f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
-    data = response.json()
+    response_data = response.json()
+    with open('data.json', 'w') as f:
+        json.dump(response_data, f)
+
+    with open('data.json', 'r') as game_data:
+        data = json.load(game_data)
 
     return render_template("games.html", data=data)
 
