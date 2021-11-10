@@ -33,8 +33,8 @@
           {% if session.user %}    
           <li>
             <div class="collapsible-header">
-              <p class="center-align">Review</p><br>
-              <i class="far fa-caret-square-down"></i>
+              <p class="review-dropdwn">Review</p><br>
+              <i class="fas fa-chevron-down review-arrow"></i>
             </div>
             <div class="collapsible-body">
               <form method="POST" action="{{ url_for('add_review') }}">
