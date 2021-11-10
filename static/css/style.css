@@ -4,6 +4,11 @@ html {
     background-color: #2f3437;
 }
 
+textarea {
+    resize: none;
+    overflow: auto;
+  }
+
 /* nav bar */
 .brand-name {
     font-size: 2.3rem;
@@ -22,11 +27,15 @@ html {
 
 .brand-name-review {
     color: #28aee1;
-    border: 2px solid whitesmoke;
+    border: 2px solid lavenderblush;
 }
 
 nav .nav-wrapper {
     background-color: #666666;
+}
+
+.sidenav {
+    background-color: lavenderblush;
 }
 
 @media screen and (min-width: 600px) {
@@ -81,6 +90,7 @@ nav .nav-wrapper {
     width: fit-content;
     padding: 5px;
     border-radius: 5px;
+    color: lavenderblush;
 }
 
 .collapsible {
@@ -132,7 +142,7 @@ nav .nav-wrapper {
     width: 100%;
     min-height: 75px;
     height: fit-content;
-    background-color: whitesmoke;
+    background-color: lavenderblush;
 }
 
 .hidden-input {
@@ -169,6 +179,19 @@ select {
     left: 50%;
     text-align: center;
 }
+
+.review-arrow, .review-dropdwn {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+}
+.review-arrow {
+    bottom: -11.5px;
+}
+.review-dropdwn {
+    bottom: -8px
+}
+
 
 @media screen and (min-width: 1219px) {
     .game-img {

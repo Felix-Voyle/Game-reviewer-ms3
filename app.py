@@ -1,5 +1,4 @@
 import os
-import json
 import requests
 from flask import (
     Flask, flash, render_template,
@@ -24,6 +23,7 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_games")
 def get_games():
+    '''requests game data from api'''
     data = []
     parameters = {
         "page_size": 12
@@ -61,8 +61,8 @@ def get_reviews():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    '''Checks if password matches, /
-    if it does registers new user if they dont already exist'''
+    '''Checks if password matches, if it does registers
+     new user if they dont already exist'''
     if request.form.get("password") == request.form.get("confirm-password"):
         # check if password matches
         if request.method == "POST":
@@ -139,7 +139,7 @@ def signout():
 
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
-    # adds review to db
+    '''adds review to db'''
     if request.method == "POST":
         review = {
             "game_name": request.form.get("game_name"),
