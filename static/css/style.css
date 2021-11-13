@@ -205,6 +205,24 @@ select {
     height: fit-content;
 }
 
+.edit-btns {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 0;
+}
+
+.btn-small {
+    width: 66px;
+    margin: 3px;
+    padding: 0;
+    font-size: 12px;
+}
+
+.btn-small i {
+    font-size: 12px;
+}
+
 
 @media screen and (min-width: 1219px) {
     .game-img {
