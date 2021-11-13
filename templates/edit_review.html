@@ -12,7 +12,7 @@
         </div>
         <div class="card-action collapsible edit-card">   
               <form method="POST" action="{{ url_for('edit_review', review_id=review._id) }}">
-                <textarea class="review-txt" placeholder="Write your review..." name="review" required>{{ review.game_review }}</textarea>
+                <textarea onkeyup="textAreaUpdate(this)" class="review-txt" placeholder="Write your review..." name="review" required>{{ review.game_review }}</textarea>
                 <label for="rating">Rating (out of 10)</label>
                 <select id="rating" name="rating" required>
                   <option value="" disabled selected>You last scored this game {{ review.game_rating }}</option>
