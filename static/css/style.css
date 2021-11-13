@@ -192,6 +192,10 @@ select {
     bottom: -8px
 }
 
+.edit-card {
+    height: 345px;
+}
+
 
 @media screen and (min-width: 1219px) {
     .game-img {

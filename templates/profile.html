@@ -25,8 +25,9 @@
           </div>
           <ul class="card-action collapsible">
             <li>
+              <a href="{{ url_for('edit_review', review_id=review._id) }}" class="waves-effect waves-light btn-small">Edit</a>
+                <a class="waves-effect waves-light btn-small">Delete</a>
               <div class="collapsible-header">
-                <span class="user-card-info">Reviewed By: {{ review.user }}</span>
                 <i class="far fa-caret-square-down"></i>
               </div>
               <div class="collapsible-body">
