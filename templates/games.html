@@ -23,13 +23,13 @@
     <div class="col s12 offset-m1 m10">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
-          <img class="game-img" src='{{ game["background_image"] }}'>
+          <img class="game-img" src='{{ game["background_image"] }}' alt="{{ game['name'] }} cover art">
           <span class="card-title">{{ game['name'] }}</span>
           <span class="card-info">Released: {{ game['released'] }}</span>
         </div>
         <ul class="card-action collapsible">
-          <span class="buy-btn"><a href="https://www.amazon.co.uk/s?k={{ game['name'] }}&i=videogames" target="_blank"
-              rel="sponsored">Buy now <i class="fas fa-store-alt"></i></a></span>
+          <div class="buy-btn"><a href="https://www.amazon.co.uk/s?k={{ game['name'] }}&i=videogames" target="_blank"
+              rel="sponsored">Buy now <i class="fas fa-store-alt"></i></a></div>
           {% if session.user %}    
           <li>
             <div class="collapsible-header">
@@ -38,9 +38,9 @@
             </div>
             <div class="collapsible-body">
               <form method="POST" action="{{ url_for('add_review') }}">
-                <textarea rows="12" class="review-txt" placeholder="Write your review..." name="review"></textarea>
+                <textarea onkeyup="textAreaUpdate(this)" class="review-txt" placeholder="Write your review..." name="review" required></textarea>
                 <label for="rating">Rating (out of 10)</label>
-                <select id="rating" name="rating">
+                <select id="rating" name="rating" required>
                   <option value="" disabled selected>What's your rating?</option>
                   <option value="1">1</option>
                   <option value="2">2</option>

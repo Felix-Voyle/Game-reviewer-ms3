@@ -98,6 +98,7 @@ nav .nav-wrapper {
 }
 .collapsible-header {
     background-color: rgb(84 110 122);
+    border-bottom: none;
 }
 .collapsible-body {
     border: none;
@@ -140,9 +141,16 @@ nav .nav-wrapper {
 
 .review-txt {
     width: 100%;
-    min-height: 75px;
+    min-height: 50px;
     height: fit-content;
     background-color: lavenderblush;
+    padding: 1px 10px 1px 10px;
+    border: 1px solid #2f3437;
+    border-radius: 4px;
+}
+
+.review-body {
+    padding-top: 0;
 }
 
 .hidden-input {
@@ -151,6 +159,7 @@ nav .nav-wrapper {
 
 select {
     display: block;
+    margin-bottom: 40px;
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
@@ -163,7 +172,7 @@ select {
 
 .rating-card-info {
     position: absolute;
-    left: 250px;
+    right: 20px;
     background-color: #ff7073;
     height: 40px;
     width: 40px;
@@ -174,7 +183,7 @@ select {
 
 .user-card-info {
     position: absolute;
-    top: 10;
+    top: 10px;
     transform: translate(-50%, -50%);
     left: 50%;
     text-align: center;
@@ -193,7 +202,7 @@ select {
 }
 
 .edit-card {
-    height: 345px;
+    height: fit-content;
 }
 
 
