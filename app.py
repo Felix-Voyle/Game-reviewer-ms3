@@ -61,7 +61,8 @@ def register():
     '''Checks if password matches, if it does registers
      new user if they dont already exist'''
     if request.method == "POST":
-        if request.form.get("password") != request.form.get("confirm-password"):
+        if request.form.get(
+         "password") != request.form.get("confirm-password"):
             flash("Passwords don't match", 'error-msg')
             return render_template("register.html")
         # check if username exists
@@ -88,7 +89,7 @@ def register():
 
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
-    '''function to sign in user if username exists'''
+    '''Signs in user if username exists'''
     if request.method == "POST":
         # check if username exists
         existing_user = mongo.db.users.find_one(
@@ -104,11 +105,7 @@ def signin():
                 return redirect(url_for(
                     "profile", username=session["user"]))
 
-            # invalid password match
-            flash("Incorrect Username/Password", 'error-msg')
-            return redirect(url_for("signin"))
-
-        # username doesn't exist
+        # username doesn't exist / Passwords wrong
         flash("Incorrect Username/Password", 'error-msg')
     return render_template("signin.html")
 
