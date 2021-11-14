@@ -60,37 +60,36 @@ def get_reviews():
 def register():
     '''Checks if password matches, if it does registers
      new user if they dont already exist'''
-    if request.form.get("password") == request.form.get("confirm-password"):
-        # check if password matches
-        if request.method == "POST":
-            # check if username exists
-            existing_user = mongo.db.users.find_one(
-                {"username": request.form.get("username").lower()})
+    if request.method == "POST":
+        if request.form.get(
+         "password") != request.form.get("confirm-password"):
+            flash("Passwords don't match", 'error-msg')
+            return render_template("register.html")
+        # check if username exists
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
 
-            if existing_user:
-                flash("Username already exists", 'error-msg')
-                return redirect(url_for("register"))
+        if existing_user:
+            flash("Username already exists", 'error-msg')
+            return redirect(url_for("register"))
 
-            new_user = {
+        new_user = {
                 "username": request.form.get("username").lower(),
                 "password": generate_password_hash(
                     request.form.get("password"))
-            }
-            mongo.db.users.insert_one(new_user)
+        }
+        mongo.db.users.insert_one(new_user)
 
-            # put new user into 'session' cookie
-            session["user"] = request.form.get("username").lower()
-            flash("Registration Successful", 'success-msg')
-            return redirect(url_for("profile", username=session["user"]))
-        return render_template("register.html")
-
-    flash("Passwords don't match", 'error-msg')
+        # put new user into 'session' cookie
+        session["user"] = request.form.get("username").lower()
+        flash("Registration Successful", 'success-msg')
+        return redirect(url_for("profile", username=session["user"]))
     return render_template("register.html")
 
 
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
-    '''function to sign in user if username exists'''
+    '''Signs in user if username exists'''
     if request.method == "POST":
         # check if username exists
         existing_user = mongo.db.users.find_one(
@@ -105,14 +104,9 @@ def signin():
                 flash(f"Welcome, {username}", "success-msg")
                 return redirect(url_for(
                     "profile", username=session["user"]))
-            else:
-                # nvalid password match
-                flash("Incorrect Username/Password", 'error-msg')
-                return redirect(url_for("signin"))
 
-        else:
-            # username doesn't exist
-            flash("Incorrect Username/Password", 'error-msg')
+        # username doesn't exist / Passwords wrong
+        flash("Incorrect Username/Password", 'error-msg')
     return render_template("signin.html")
 
 
@@ -142,26 +136,26 @@ def add_review():
             "game_name": request.form.get("game_name"),
             "user": session["user"]
         }
-        check_exists = mongo.db.reviews.find_one(already_reviewed)
-        
-        if check_exists == None:
-            review = {
-                "game_name": request.form.get("game_name"),
-                "game_rating": request.form.get("rating"),
-                "game_img": request.form.get("game_img"),
-                "user": session["user"],
-                "game_review": request.form.get("review")
-            }
-            mongo.db.reviews.insert_one(review)
-            flash("Review added successfully", "success-msg")
-            return redirect(url_for("get_reviews"))
-
-        flash("You've Already reviewed this game", "error-msg")
+    check_exists = mongo.db.reviews.find_one(already_reviewed)
+    if check_exists is None:
+        review = {
+            "game_name": request.form.get("game_name"),
+            "game_rating": request.form.get("rating"),
+            "game_img": request.form.get("game_img"),
+            "user": session["user"],
+            "game_review": request.form.get("review")
+        }
+        mongo.db.reviews.insert_one(review)
+        flash("Review added successfully", "success-msg")
         return redirect(url_for("get_reviews"))
+
+    flash("You've Already reviewed this game", "error-msg")
+    return redirect(url_for("get_reviews"))
 
 
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
+    '''Finds review by id and edits it'''
     review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
     if request.method == "POST":
         edit = {
@@ -181,6 +175,7 @@ def edit_review(review_id):
 
 @app.route("/delete_review/<review_id>")
 def delete_review(review_id):
+    '''Deletes Review by id'''
     mongo.db.reviews.delete_one({"_id": ObjectId(review_id)})
     flash("Review deleted successfully", "success-msg")
     return redirect(url_for("get_reviews"))
