@@ -24,7 +24,6 @@ mongo = PyMongo(app)
 @app.route("/get_games")
 def get_games():
     '''requests game data from api'''
-    data = []
     parameters = {
         "page_size": 12
     }
@@ -38,13 +37,11 @@ def get_games():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     '''Allows user to search games using the rawg API as the database'''
-    data = []
     query = request.form.get("query")
     parameters = {
         "page_size": 12,
         "search": f"{query}"
     }
-
     response = requests.get(
         f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
     data = response.json()
@@ -141,19 +138,26 @@ def signout():
 def add_review():
     '''adds review to db'''
     if request.method == "POST":
-        review = {
+        already_reviewed = {
             "game_name": request.form.get("game_name"),
-            "game_rating": request.form.get("rating"),
-            "game_img": request.form.get("game_img"),
-            "user": session["user"],
-            "game_review": request.form.get("review")
+            "user": session["user"]
         }
+        check_exists = mongo.db.reviews.find_one(already_reviewed)
+        
+        if check_exists == None:
+            review = {
+                "game_name": request.form.get("game_name"),
+                "game_rating": request.form.get("rating"),
+                "game_img": request.form.get("game_img"),
+                "user": session["user"],
+                "game_review": request.form.get("review")
+            }
+            mongo.db.reviews.insert_one(review)
+            flash("Review added successfully", "success-msg")
+            return redirect(url_for("get_reviews"))
 
-        mongo.db.reviews.insert_one(review)
-        flash("Review added successfully", "success-msg")
+        flash("You've Already reviewed this game", "error-msg")
         return redirect(url_for("get_reviews"))
-
-    return render_template("games.html")
 
 
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
