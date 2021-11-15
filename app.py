@@ -181,9 +181,15 @@ def delete_review(review_id):
     return redirect(url_for("get_reviews"))
 
 
+@app.route("/delete_profile")
+def delete_profile():
+    '''takes user to confirm if they want to delete profile'''
+    return render_template("delete_profile.html")
+
+
 @app.route("/delete_user")
 def delete_user():
-    '''Deletes user's profile/account'''
+    '''Deletes user's profile/account along with all reviews'''
     mongo.db.reviews.delete_many({"user": session["user"]})
     mongo.db.users.delete_one({"username": session["user"]})
     session.pop("user")

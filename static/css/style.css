@@ -223,6 +223,12 @@ select {
     font-size: 12px;
 }
 
+.btn-yes, .btn-no {
+    width: 150px;
+    font-size: 12px;
+    margin: 5px;
+}
+
 
 @media screen and (min-width: 1219px) {
     .game-img {
