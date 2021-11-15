@@ -181,6 +181,17 @@ def delete_review(review_id):
     return redirect(url_for("get_reviews"))
 
 
+@app.route("/delete_user")
+def delete_user():
+    '''Deletes user's profile/account'''
+    mongo.db.reviews.delete_many({"user": session["user"]})
+    mongo.db.users.delete_one({"username": session["user"]})
+    session.pop("user")
+
+    flash("Account deleted successfully", "success-msg")
+    return redirect(url_for("register"))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
