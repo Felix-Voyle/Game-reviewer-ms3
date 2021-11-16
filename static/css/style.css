@@ -68,6 +68,12 @@ nav .nav-wrapper {
     padding: 10px;
 }
 
+/* profile page */
+
+.profile-option {
+    margin: 10px
+}
+
 /* game/home page */
 
 .game-img {
