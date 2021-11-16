@@ -107,6 +107,20 @@ nav .nav-wrapper {
     padding-right: 0px;
 }
 
+.search-btn {
+    position: absolute;
+    border-radius: 16px;
+    right: -60px;
+}
+
+.search-btn p {
+    margin: 0 0 2px 0;
+}
+.search-btn i {
+    font-size: 18px;
+    margin-top: 2px;
+}
+
 .review-btn, .buy-btn {
   box-shadow: 0 2px 0;
   padding: 0.5em 0.5em;
