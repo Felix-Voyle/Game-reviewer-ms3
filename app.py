@@ -117,7 +117,8 @@ def profile(username):
         {"username": session["user"]})["username"]
     reviews = mongo.db.reviews.find(
         {"user": session["user"]})
-    return render_template("user/profile.html", username=username, reviews=reviews)
+    return render_template(
+        "user/profile.html", username=username, reviews=reviews)
 
 
 @app.route("/signout")
@@ -206,26 +207,24 @@ def change_password():
 
 @app.route("/new_password", methods=["GET", "POST"])
 def new_password():
-    '''Checks if user's password is correct then if it is lets them change it'''
+    '''Checks user's password and if it is lets them change it'''
     user = mongo.db.users.find_one({"username": session["user"]})
-    print(user)
     if request.method == "POST":
         if check_password_hash(
              user["password"], request.form.get("oldPassword")):
-            newPassword = request.form.get("newPassword")
-            confirmNewPassword = request.form.get("confirmNewPassword")
-            if newPassword == confirmNewPassword:
+            password = request.form.get("newPassword")
+            confirm_new_password = request.form.get("confirmNewPassword")
+            if password == confirm_new_password:
                 mongo.db.users.update_one(
                     {"username": session["user"]},
                     {"$set": {"password": generate_password_hash(
-                        newPassword)}}
+                        new_password)}}
                 )
                 flash("password updated", "success-msg")
                 return redirect(url_for("profile", username=session["user"]))
 
             flash("passwords don't match", "error-msg")
     return redirect(url_for("change_password"))
-
 
 
 if __name__ == "__main__":
