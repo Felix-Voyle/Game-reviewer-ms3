@@ -198,6 +198,36 @@ def delete_user():
     return redirect(url_for("register"))
 
 
+@app.route("/change_password")
+def change_password():
+    '''takes user to change password form'''
+    return render_template("user/change_password.html")
+
+
+@app.route("/new_password", methods=["GET", "POST"])
+def new_password():
+    '''Checks if user's password is correct then if it is lets them change it'''
+    user = mongo.db.users.find_one({"username": session["user"]})
+    print(user)
+    if request.method == "POST":
+        if check_password_hash(
+             user["password"], request.form.get("oldPassword")):
+            newPassword = request.form.get("newPassword")
+            confirmNewPassword = request.form.get("confirmNewPassword")
+            if newPassword == confirmNewPassword:
+                mongo.db.users.update_one(
+                    {"username": session["user"]},
+                    {"$set": {"password": generate_password_hash(
+                        newPassword)}}
+                )
+                flash("password updated", "success-msg")
+                return redirect(url_for("profile", username=session["user"]))
+
+            flash("passwords don't match", "error-msg")
+    return redirect(url_for("change_password"))
+
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
