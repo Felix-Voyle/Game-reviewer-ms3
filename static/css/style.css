@@ -68,6 +68,12 @@ nav .nav-wrapper {
     padding: 10px;
 }
 
+/* profile page */
+
+.profile-option {
+    margin: 10px
+}
+
 /* game/home page */
 
 .game-img {
@@ -105,6 +111,20 @@ nav .nav-wrapper {
     padding-bottom: 30px;
     padding-left: 0px;
     padding-right: 0px;
+}
+
+.search-btn {
+    position: absolute;
+    border-radius: 16px;
+    right: -60px;
+}
+
+.search-btn p {
+    margin: 0 0 2px 0;
+}
+.search-btn i {
+    font-size: 18px;
+    margin-top: 2px;
 }
 
 .review-btn, .buy-btn {
@@ -221,6 +241,12 @@ select {
 
 .btn-small i {
     font-size: 12px;
+}
+
+.btn-yes, .btn-no {
+    width: 150px;
+    font-size: 12px;
+    margin: 5px;
 }
 
 

@@ -31,7 +31,7 @@ def get_games():
         f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
     data = response.json()
 
-    return render_template("games.html", data=data)
+    return render_template("review/games.html", data=data)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -46,14 +46,14 @@ def search():
         f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
     data = response.json()
 
-    return render_template("games.html", data=data)
+    return render_template("review/games.html", data=data)
 
 
 @app.route("/get_reviews")
 def get_reviews():
     '''Shows list of reviews from Mongodb'''
     reviews = mongo.db.reviews.find()
-    return render_template("reviews.html", reviews=reviews)
+    return render_template("review/reviews.html", reviews=reviews)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -64,7 +64,7 @@ def register():
         if request.form.get(
          "password") != request.form.get("confirm-password"):
             flash("Passwords don't match", 'error-msg')
-            return render_template("register.html")
+            return render_template("user/register.html")
         # check if username exists
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
@@ -84,7 +84,7 @@ def register():
         session["user"] = request.form.get("username").lower()
         flash("Registration Successful", 'success-msg')
         return redirect(url_for("profile", username=session["user"]))
-    return render_template("register.html")
+    return render_template("user/register.html")
 
 
 @app.route("/signin", methods=["GET", "POST"])
@@ -107,7 +107,7 @@ def signin():
 
         # username doesn't exist / Passwords wrong
         flash("Incorrect Username/Password", 'error-msg')
-    return render_template("signin.html")
+    return render_template("user/signin.html")
 
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
@@ -117,7 +117,8 @@ def profile(username):
         {"username": session["user"]})["username"]
     reviews = mongo.db.reviews.find(
         {"user": session["user"]})
-    return render_template("profile.html", username=username, reviews=reviews)
+    return render_template(
+        "user/profile.html", username=username, reviews=reviews)
 
 
 @app.route("/signout")
@@ -170,7 +171,7 @@ def edit_review(review_id):
         flash("Review updated successfully", "success-msg")
         return redirect(url_for("get_reviews"))
 
-    return render_template("edit_review.html", review=review)
+    return render_template("review/edit_review.html", review=review)
 
 
 @app.route("/delete_review/<review_id>")
@@ -179,6 +180,51 @@ def delete_review(review_id):
     mongo.db.reviews.delete_one({"_id": ObjectId(review_id)})
     flash("Review deleted successfully", "success-msg")
     return redirect(url_for("get_reviews"))
+
+
+@app.route("/delete_profile")
+def delete_profile():
+    '''takes user to confirm if they want to delete profile'''
+    return render_template("user/delete_profile.html")
+
+
+@app.route("/delete_user")
+def delete_user():
+    '''Deletes user's profile/account along with all reviews'''
+    mongo.db.reviews.delete_many({"user": session["user"]})
+    mongo.db.users.delete_one({"username": session["user"]})
+    session.pop("user")
+
+    flash("Account deleted successfully", "success-msg")
+    return redirect(url_for("register"))
+
+
+@app.route("/change_password")
+def change_password():
+    '''takes user to change password form'''
+    return render_template("user/change_password.html")
+
+
+@app.route("/new_password", methods=["GET", "POST"])
+def new_password():
+    '''Checks user's password and if it is lets them change it'''
+    user = mongo.db.users.find_one({"username": session["user"]})
+    if request.method == "POST":
+        if check_password_hash(
+             user["password"], request.form.get("oldPassword")):
+            password = request.form.get("newPassword")
+            confirm_new_password = request.form.get("confirmNewPassword")
+            if password == confirm_new_password:
+                mongo.db.users.update_one(
+                    {"username": session["user"]},
+                    {"$set": {"password": generate_password_hash(
+                        new_password)}}
+                )
+                flash("password updated", "success-msg")
+                return redirect(url_for("profile", username=session["user"]))
+
+            flash("passwords don't match", "error-msg")
+    return redirect(url_for("change_password"))
 
 
 if __name__ == "__main__":
