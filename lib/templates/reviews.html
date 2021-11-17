@@ -1,24 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h4 class="center-align">Profile</h4>
 
-<div class="row">
-    <div class="col s12 m8 offset-m2">
-        <div class="card-panel">
-            <h5 class="center-align">
-                <i class="fas fa-user prefix"></i>
-                {{ username }}'s Profile
-            </h5>
-            <div class="card-action center-align">
-              <a class="profile-option" href="{{ url_for('delete_profile') }}">Delete Account</a><br>
-              <a class="profile-option" href="{{ url_for('change_password') }}">Change Password</a><br>
-              <a class="profile-option" href="#">Edit info</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<h4 class="center-align">My Reviews</h4>
 {% for review in reviews|reverse %}
 <div class="row">
   <div class="col s12 offset-m1 m10">
@@ -26,25 +8,28 @@
       <div class="card-content white-text">
         <img class="game-img" src='{{ review.game_img }}'>
         <span class="card-title">{{ review.game_name }}</span>
+        <span class="card-info">Reviewed By: {{ review.user }}</span>
         <span class="rating-card-info">
           <p class="text-align">{{ review.game_rating }}</p>
         </span>
       </div>
       <ul class="card-action collapsible">
         <li>
+          {% if session.user|lower == review.user|lower %}
           <div class="edit-btns">
-            <a href="{{ url_for('edit_review', review_id=review._id) }}" class="waves-effect waves-light btn-small edit-btn">
+            <a href="{{ url_for('games.edit_review', review_id=review._id) }}" class="waves-effect waves-light btn-small edit-btn">
               <i class="fas fa-pencil-alt"></i> Edit</a>
-            <a href="{{ url_for('delete_review', review_id=review._id) }}"
+            <a href="{{ url_for('games.delete_review', review_id=review._id) }}"
               class="waves-effect red accent-2 btn-small delete-btn">Delete
               <i class="far fa-trash-alt"></i></a>
           </div>
+          {% endif %}
           <div class="collapsible-header">
             <p class="review-dropdwn">Read</p><br>
             <i class="fas fa-chevron-down review-arrow"></i>
           </div>
           <div class="collapsible-body review-body">
-            <article class="review-txt">
+            <article class="review-txt"> 
               <p>{{ review.game_review }}</p>
             </article>
           </div>
@@ -55,6 +40,5 @@
 </div>
 </div>
 {% endfor %}
-
 
 {% endblock %}
