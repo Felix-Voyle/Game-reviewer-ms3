@@ -9,8 +9,9 @@ from lib.helper import db
 if os.path.exists("env.py"):
     import env
 
-blueprint = Blueprint("game", __name__, url_prefix="/game")
+blueprint = Blueprint("games", __name__, url_prefix="/games")
 API_KEY = os.environ.get("API_KEY")
+
 
 
 @blueprint.route("/")
@@ -67,10 +68,10 @@ def add_review():
         }
         db().reviews.insert_one(review)
         flash("Review added successfully", "success-msg")
-        return redirect(url_for("get_reviews"))
+        return redirect(url_for("games.get_reviews"))
 
     flash("You've Already reviewed this game", "error-msg")
-    return redirect(url_for("get_reviews"))
+    return redirect(url_for("games.get_reviews"))
 
 
 @blueprint.route("/edit_review/<review_id>", methods=["GET", "POST"])
@@ -88,9 +89,9 @@ def edit_review(review_id):
 
         db().reviews.update({"_id": ObjectId(review_id)}, edit)
         flash("Review updated successfully", "success-msg")
-        return redirect(url_for("get_reviews"))
+        return redirect(url_for("games.get_reviews"))
 
-    return render_template("review/edit_review.html", review=review)
+    return render_template("edit_review.html", review=review)
 
 
 @blueprint.route("/delete_review/<review_id>")
@@ -98,4 +99,4 @@ def delete_review(review_id):
     '''Deletes Review by id'''
     db().reviews.delete_one({"_id": ObjectId(review_id)})
     flash("Review deleted successfully", "success-msg")
-    return redirect(url_for("get_reviews"))
+    return redirect(url_for("games.get_reviews"))

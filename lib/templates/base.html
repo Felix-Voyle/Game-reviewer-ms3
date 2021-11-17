@@ -20,20 +20,20 @@
     <!--Main navigation bar-->
     <nav>
         <div class="nav-wrapper">
-            <a href="{{ url_for('get_games') }}" class="brand-logo">
+            <a href="{{ url_for('games.get_games') }}" class="brand-logo">
                 <h1 class="brand-name"><span class="brand-name-game">GAME</span><span class="brand-name-review"><span
                             class="brand-name-r">R</span>eview</span></h1>
             </a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="{{ url_for('get_games') }}">Home</a></li>
-                <li><a href="{{ url_for('get_reviews') }}">Reviews</a></li>
+                <li><a href="{{ url_for('games.get_games') }}">Home</a></li>
+                <li><a href="{{ url_for('games.get_reviews') }}">Reviews</a></li>
                 {% if session.user %}
-                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                <li><a href="{{ url_for('signout') }}">Sign out</a></li>
+                <li><a href="{{ url_for('user.profile', username=session['user']) }}">Profile</a></li>
+                <li><a href="{{ url_for('user.signout') }}">Sign out</a></li>
                 {% else %}
-                <li><a href="{{ url_for('register') }}">Register</a></li>
-                <li><a href="{{ url_for('signin') }}">Sign in</a></li>
+                <li><a href="{{ url_for('user.register') }}">Register</a></li>
+                <li><a href="{{ url_for('user.signin') }}">Sign in</a></li>
                 {% endif %}
             </ul>
 
@@ -42,14 +42,14 @@
     </nav>
     <!--Mobile navigation side menu-->
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="{{ url_for('get_games') }}">Home</a></li>
-        <li><a href="{{ url_for('get_reviews') }}">Reviews</a></li>
+        <li><a href="{{ url_for('games.get_games') }}">Home</a></li>
+        <li><a href="{{ url_for('games.get_reviews') }}">Reviews</a></li>
         {% if session.user %}
-        <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-        <li><a href="{{ url_for('signout') }}">Sign out</a></li>
+        <li><a href="{{ url_for('user.profile', username=session['user']) }}">Profile</a></li>
+        <li><a href="{{ url_for('user.signout') }}">Sign out</a></li>
         {% else %}
-        <li><a href="{{ url_for('register') }}">Register</a></li>
-        <li><a href="{{ url_for('signin') }}">Sign in</a></li>
+        <li><a href="{{ url_for('user.register') }}">Register</a></li>
+        <li><a href="{{ url_for('user.signin') }}">Sign in</a></li>
         {% endif %}
     </ul>
 

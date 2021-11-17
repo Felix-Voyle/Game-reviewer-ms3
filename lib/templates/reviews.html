@@ -17,9 +17,9 @@
         <li>
           {% if session.user|lower == review.user|lower %}
           <div class="edit-btns">
-            <a href="{{ url_for('edit_review', review_id=review._id) }}" class="waves-effect waves-light btn-small edit-btn">
+            <a href="{{ url_for('games.edit_review', review_id=review._id) }}" class="waves-effect waves-light btn-small edit-btn">
               <i class="fas fa-pencil-alt"></i> Edit</a>
-            <a href="{{ url_for('delete_review', review_id=review._id) }}"
+            <a href="{{ url_for('games.delete_review', review_id=review._id) }}"
               class="waves-effect red accent-2 btn-small delete-btn">Delete
               <i class="far fa-trash-alt"></i></a>
           </div>

@@ -26,7 +26,7 @@ def register():
 
         if existing_user:
             flash("Username already exists", 'error-msg')
-            return redirect(url_for("register"))
+            return redirect(url_for("user.register"))
 
         new_user = {
                 "username": request.form.get("username").lower(),
@@ -38,7 +38,7 @@ def register():
         # put new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
         flash("Registration Successful", 'success-msg')
-        return redirect(url_for("profile", username=session["user"]))
+        return redirect(url_for("user.profile", username=session["user"]))
     return render_template("register.html")
 
 
@@ -58,7 +58,7 @@ def signin():
                 username = request.form.get("username")
                 flash(f"Welcome, {username}", "success-msg")
                 return redirect(url_for(
-                    "profile", username=session["user"]))
+                    "user.profile", username=session["user"]))
 
         # username doesn't exist / Passwords wrong
         flash("Incorrect Username/Password", 'error-msg')
@@ -81,7 +81,7 @@ def signout():
     '''remove user from session cookie'''
     flash("You have been logged out", "success-msg")
     session.pop("user")
-    return redirect(url_for("signin"))
+    return redirect(url_for("user.signin"))
 
 
 @blueprint.route("/delete_profile")
@@ -104,7 +104,7 @@ def delete_user():
 @blueprint.route("/change_password")
 def change_password():
     '''takes user to change password form'''
-    return render_template("user/change_password.html")
+    return render_template("change_password.html")
 
 
 @blueprint.route("/new_password", methods=["GET", "POST"])
@@ -123,7 +123,7 @@ def new_password():
                         password)}}
                 )
                 flash("password updated", "success-msg")
-                return redirect(url_for("profile", username=session["user"]))
+                return redirect(url_for("user.profile", username=session["user"]))
 
             flash("passwords don't match", "error-msg")
-    return redirect(url_for("change_password"))
+    return redirect(url_for("user.change_password"))
