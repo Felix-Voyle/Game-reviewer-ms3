@@ -19,7 +19,7 @@ def register():
         if request.form.get(
          "password") != request.form.get("confirm-password"):
             flash("Passwords don't match", 'error-msg')
-            return render_template("user/register.html")
+            return render_template("register.html")
         # check if username exists
         existing_user = db().users.find_one(
             {"username": request.form.get("username").lower()})
