@@ -16,6 +16,7 @@
   </form>    
 </div>
 
+
   {% for game in data['results'] %}
   <div class="row">
     <div class="col s12 offset-m1 m10">
@@ -23,7 +24,11 @@
         <div class="card-content white-text">
           <img class="game-img" src='{{ game["background_image"] }}' alt="{{ game['name'] }} cover art">
           <span class="card-title">{{ game['name'] }}</span>
-          <span class="card-info">Released: {{ game['released'] }}</span>
+          <span class="card-info">Released: {{ game['released'] }}</span><br>
+          <span class="card-info">Platforms: </span>
+          {% for platform in game['platforms'] %}
+          <span class="card-info">{{ platform['platform']['name'] }} </span>
+          {% endfor %}
         </div>
         <ul class="card-action collapsible">
           <div class="buy-btn"><a href="https://www.amazon.co.uk/s?k={{ game['name'] }}&i=videogames" target="_blank"
