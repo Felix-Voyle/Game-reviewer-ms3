@@ -31,7 +31,9 @@ def get_games():
         f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
     data = response.json()
 
-    return render_template("review/games.html", data=data)
+    length = len(data['results'][0]['platforms'])
+
+    return render_template("review/games.html", data=data, length=length)
 
 
 @app.route("/search", methods=["GET", "POST"])
