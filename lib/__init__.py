@@ -16,9 +16,10 @@ app.secret_key = os.environ.get("SECRET_KEY")
 # initializing the client for mongodb
 mongo = PyMongo(app)
 
-# register blueprints
+
 from .views import user
 from .views import games
+
 
 app.register_blueprint(user)
 app.register_blueprint(games)
@@ -26,4 +27,5 @@ app.register_blueprint(games)
 
 @app.route("/")
 def index():
+    '''directs to mainpage on app startup'''
     return redirect("/games")
