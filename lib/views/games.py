@@ -65,7 +65,7 @@ def search():
     query = request.form.get("query")
     parameters = {
         "page_size": 12,
-        "search": f"{query}"
+        "search": query
     }
     response = requests.get(
         f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
@@ -78,6 +78,14 @@ def search():
 def get_reviews():
     '''Shows list of reviews from Mongodb'''
     reviews = db().reviews.find()
+    return render_template("reviews.html", reviews=reviews)
+
+
+@blueprint.route("/search_reviews", methods=["GET", "POST"])
+def search_reviews():
+    '''Searches through user reviews'''
+    query = request.form.get("query")
+    reviews = list(db().reviews.find({"$text": {"$search": query}}))
     return render_template("reviews.html", reviews=reviews)
 
 
