@@ -23,7 +23,7 @@
       <div class="card-content white-text">
         <img class="game-img" src='{{ review.game_img }}'>
         <span class="card-title">{{ review.game_name }}</span>
-        <span class="card-info">Reviewed By: {{ review.user }}</span>
+        <span class="card-info reviewed-by">Reviewed By: {{ review.user }}</span>
         <span class="rating-card-info">
           <p class="text-align">{{ review.game_rating }}</p>
         </span>
@@ -39,7 +39,7 @@
               <i class="far fa-trash-alt"></i></a>
           </div>
           {% endif %}
-          <div class="collapsible-header">
+          <div class="collapsible-header card-collapsible-header">
             <p class="review-dropdwn">Read</p><br>
             <i class="fas fa-chevron-down review-arrow"></i>
           </div>

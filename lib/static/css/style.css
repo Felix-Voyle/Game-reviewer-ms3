@@ -80,7 +80,21 @@ nav .nav-wrapper {
     margin: 10px
 }
 
-/* game/home page */
+/* game & review */
+.card .card-content .card-title {
+    background-color: black;
+}
+
+.card .card-content .card-title, .reviewed-by {
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    color: lavenderblush;
+}
+
+.reviewed-by {
+    background-color: #28aee1;
+}
 
 .game-img {
     width: 100%;
@@ -95,14 +109,6 @@ nav .nav-wrapper {
 
 .card-content {
     min-height: 150px;
-}
-
-.card .card-content .card-title {
-    background-color: black;
-    width: fit-content;
-    padding: 5px;
-    border-radius: 5px;
-    color: lavenderblush;
 }
 
 .card .card-action {
@@ -122,6 +128,22 @@ nav .nav-wrapper {
     padding-left: 0px;
     padding-right: 0px;
 }
+
+.card-collapsible-header {
+    padding: 0;
+}
+
+.search-bar {
+    background-color: #2f3437;
+}
+
+@media screen and (min-width: 1219px) {
+    .game-img {
+        height: 164px;
+    }
+}
+
+/* game/home page */
 
 .search-btn {
     position: absolute;
@@ -171,7 +193,7 @@ nav .nav-wrapper {
 
 .review-txt {
     width: 100%;
-    min-height: 50px;
+    min-height: 75px;
     height: fit-content;
     background-color: lavenderblush;
     padding: 1px 10px 1px 10px;
@@ -182,6 +204,7 @@ nav .nav-wrapper {
 .platform-title, .released-title {
     font-weight: bold;
     font-size: 15px;
+    margin-bottom: 4px;
 }
 
 .platform-info {
@@ -215,10 +238,6 @@ nav .nav-wrapper {
     background-color: #a4c639;
 }
 
-.review-body {
-    padding-top: 0;
-}
-
 .hidden-input {
     display: none;
 }
@@ -234,6 +253,11 @@ select {
 }
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
     color: white;
+}
+
+/* review page */
+.review-body {
+    padding-top: 0;
 }
 
 .rating-card-info {
@@ -267,6 +291,7 @@ select {
     bottom: -8px
 }
 
+/* edit */
 .edit-card {
     height: fit-content;
 }
@@ -289,19 +314,10 @@ select {
     font-size: 12px;
 }
 
+/* change password */
+
 .btn-yes, .btn-no {
     width: 150px;
     font-size: 12px;
     margin: 5px;
-}
-
-
-@media screen and (min-width: 1219px) {
-    .game-img {
-        height: 164px;
-    }
-}
-
-.search-bar {
-    background-color: #2f3437;
 }
