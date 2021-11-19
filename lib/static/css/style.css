@@ -179,6 +179,42 @@ nav .nav-wrapper {
     border-radius: 4px;
 }
 
+.platform-title, .released-title {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.platform-info {
+    margin-right: 4px;
+    padding: 1px;
+    border-radius: 5px;
+}
+
+.PlayStation {
+    background-color: blue;
+}
+.Xbox {
+    background-color: green;
+}
+.Nintendo {
+    background-color: red;
+}
+.PC {
+    background-color: black;
+}
+.Linux {
+    background-color: coral;
+}
+.macOS {
+    background-color: purple;
+}
+.iOS {
+    background-color: grey;
+}
+.Android {
+    background-color: #a4c639;
+}
+
 .review-body {
     padding-top: 0;
 }
