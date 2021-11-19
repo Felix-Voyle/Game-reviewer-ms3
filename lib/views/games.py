@@ -44,7 +44,7 @@ def edit_review_data():
             "game_review": request.form.get("review")
         }
     return edit
-    
+
 
 @blueprint.route("/")
 def get_games():

@@ -185,12 +185,16 @@ nav .nav-wrapper {
 .buy-btn {
     background-color: #ff7073;
     left: 50%;
-    bottom: 10px;
+    top: 167px;
     z-index: 1;
 }
 .buy-btn:hover {
     cursor: pointer;
     background-color: #5a292a;
+}
+
+.buy-btn a {
+    color: lavenderblush;
 }
 
 .review-txt {
