@@ -44,7 +44,7 @@ def edit_review_data():
             "game_review": request.form.get("review")
         }
     return edit
-
+    
 
 @blueprint.route("/")
 def get_games():
@@ -56,10 +56,14 @@ def get_games():
         response = requests.get(
             f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
         data = response.json()
+        links = []
+        for game in data['results']:
+            no_spaces = game['name'].replace(" ", "")
+            links.append(no_spaces)
     except requests.exceptions.RequestException as request_exception:
         raise SystemExit from request_exception
 
-    return render_template("games.html", data=data)
+    return render_template("games.html", data=data, links=links)
 
 
 @blueprint.route("/search", methods=["GET", "POST"])
