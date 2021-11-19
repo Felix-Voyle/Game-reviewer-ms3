@@ -52,9 +52,12 @@ def get_games():
     parameters = {
         "page_size": 12
     }
-    response = requests.get(
-        f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
-    data = response.json()
+    try:
+        response = requests.get(
+            f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
+        data = response.json()
+    except requests.exceptions.RequestException as request_exception:
+        raise SystemExit from request_exception
 
     return render_template("games.html", data=data)
 
@@ -67,9 +70,12 @@ def search():
         "page_size": 12,
         "search": query
     }
-    response = requests.get(
-        f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
-    data = response.json()
+    try:
+        response = requests.get(
+            f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
+        data = response.json()
+    except requests.exceptions.RequestException as request_exception:
+        raise SystemExit from request_exception
 
     return render_template("games.html", data=data)
 
