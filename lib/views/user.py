@@ -124,16 +124,15 @@ def change_password():
 def new_password():
     '''Checks user's password and if it is lets them change it'''
     user = db().users.find_one({"username": session["user"]})
+    password = request.form.get("newPassword")
+    confirm_new_password = request.form.get("confirmNewPassword")
     if request.method == "POST":
+        if password != confirm_new_password:
+            flash("passwords don't match", "error-msg")
+            return redirect(url_for("user.change_password"))
         if check_password_hash(
              user["password"], request.form.get("oldPassword")):
-            password = request.form.get("newPassword")
-            confirm_new_password = request.form.get("confirmNewPassword")
-            if password == confirm_new_password:
-                update_password()
-                flash("password updated", "success-msg")
-                return redirect(url_for(
-                    "user.profile", username=session["user"]))
-
-            flash("passwords don't match", "error-msg")
-    return redirect(url_for("user.change_password"))
+            update_password()
+            flash("password updated", "success-msg")
+            return redirect(url_for(
+                 "user.profile", username=session["user"]))
