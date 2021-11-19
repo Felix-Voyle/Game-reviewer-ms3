@@ -41,15 +41,15 @@ Permanent Marker font / Press Start 2p will be used for the main branding for th
 ## Wireframes 
 ---
 
-Small Screens - [View](static/wireframes/small-ms3.pdf)
+[Small screens](static/wireframes/small-ms3.pdf)
 
-Medium Screens - [View](static/wireframes/med-ms3.pdf)
+[Medium screens](static/wireframes/med-ms3.pdf)
 
-Large Screens - [View](static/wireframes/lrg-ms3.pdf)
+[Large screens](static/wireframes/lrg-ms3.pdf)
 
 ## Data Structure
 ---
-Data Structure - [View](static/wireframes/data-structure.png)
+[Data Structure](static/wireframes/data-structure.png)
 
 ### Any updates made to the Wireframes?
 

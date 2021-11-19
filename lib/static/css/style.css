@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Zen+Kurenaido&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Press+Start+2P&family=Zen+Kurenaido&display=swap');
 
 html {
     margin: 0;
     padding: 0;
     background-color: #2f3437;
+    font-family: 'Zen Kurenaido', sans-serif;
 }
 
 textarea {
@@ -20,16 +21,19 @@ textarea {
 
 .brand-name-game {
     letter-spacing: 1.2px;
-    color: #ff7073;
 }
 
-.brand-name-r {
+.brand-name-game, .brand-name-r {
     color: #ff7073;
+    font-family: 'Press Start 2P', cursive;
+    position: relative;
+    bottom: -5px;
 }
 
 .brand-name-review {
     color: #28aee1;
     border: 2px solid lavenderblush;
+    font-family: 'Permanent Marker', cursive;
 }
 
 nav .nav-wrapper {
