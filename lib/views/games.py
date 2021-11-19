@@ -50,7 +50,7 @@ def edit_review_data():
 def get_games():
     '''requests game data from api'''
     parameters = {
-        "page_size": 12
+        "page_size": 8
     }
     try:
         response = requests.get(
@@ -67,7 +67,7 @@ def search():
     '''Allows user to search games using the rawg API as the database'''
     query = request.form.get("query")
     parameters = {
-        "page_size": 12,
+        "page_size": 8,
         "search": query
     }
     try:
