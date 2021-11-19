@@ -1,5 +1,5 @@
-from lib import app
 import os
+from lib import app
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
