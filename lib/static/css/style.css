@@ -82,6 +82,10 @@ nav .nav-wrapper {
 }
 
 /* game & review */
+.card .card-title {
+    font-size: 18px;
+}
+
 .card .card-content .card-title {
     background-color: black;
 }
@@ -109,7 +113,7 @@ nav .nav-wrapper {
 }
 
 .card-content {
-    min-height: 150px;
+    min-height: 170px;
 }
 
 .card .card-action {
@@ -185,9 +189,10 @@ nav .nav-wrapper {
 .buy-btn {
     background-color: #ff7073;
     left: 50%;
-    top: 167px;
+    top: 170px;
     z-index: 1;
 }
+
 .buy-btn:hover {
     cursor: pointer;
     background-color: #5a292a;
@@ -207,10 +212,10 @@ nav .nav-wrapper {
     border-radius: 4px;
 }
 
-.platform-title, .released-title {
+.released-title {
     font-weight: bold;
     font-size: 15px;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
 }
 
 .platform-info {
