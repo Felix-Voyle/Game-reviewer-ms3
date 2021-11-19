@@ -92,6 +92,8 @@ def search_reviews():
     '''Searches through user reviews'''
     query = request.form.get("query")
     reviews = list(db().reviews.find({"$text": {"$search": query}}))
+    if not reviews:
+        flash("Couldn't find any reviews to match your search", "error-msg")
     return render_template("reviews.html", reviews=reviews)
 
 
