@@ -42,7 +42,7 @@
             </div>
             <div class="collapsible-body">
               <form method="POST" action="{{ url_for('games.add_review') }}">
-                <textarea onkeyup="textAreaUpdate(this)" class="review-txt" placeholder="Write your review..." name="review" required></textarea>
+                <textarea onkeyup="textAreaUpdate(this)" minlength="30" maxlength="300" class="review-txt" placeholder="Write your review..." name="review" required></textarea>
                 <label for="rating">Rating (out of 10)</label>
                 <select id="rating" name="rating" required>
                   <option value="" disabled selected>What's your rating?</option>
