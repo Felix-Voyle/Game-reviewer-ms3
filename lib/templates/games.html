@@ -29,10 +29,8 @@
         </span>
         {% endfor %}
       </div>
-      {% for link in links %}
-      <div class="buy-btn"><a href="https://www.amazon.co.uk/s?k={{ link }}&i=videogames" target="_blank"
+      <div class="buy-btn"><a href="https://www.amazon.co.uk/s?k={{ game['name']|replace(' ', '+') }}&i=videogames" target="_blank"
           rel="sponsored noopener">Buy now <i class="fas fa-store-alt"></i></a></div>
-      {% endfor %}
       <ul class="card-action collapsible">
         {% if session.user %}
         <li>

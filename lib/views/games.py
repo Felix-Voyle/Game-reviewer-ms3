@@ -56,10 +56,6 @@ def get_games():
         response = requests.get(
             f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
         data = response.json()
-        links = []
-        for game in data['results']:
-            no_spaces = game['name'].replace(" ", "")
-            links.append(no_spaces)
     except requests.exceptions.RequestException as request_exception:
         raise SystemExit from request_exception
 
