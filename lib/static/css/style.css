@@ -12,6 +12,10 @@ textarea {
     overflow: auto;
   }
 
+.heading-white {
+    color: lavenderblush;
+}
+
 /* nav bar */
 .brand-name {
     font-size: 2.3rem;
@@ -148,7 +152,7 @@ nav .nav-wrapper {
     }
 }
 
-/* game/home page */
+/* game/review pages */
 
 .search-btn {
     position: absolute;
