@@ -1,3 +1,6 @@
+<a href="https://ibb.co/BC9qwjv"><img src="https://i.ibb.co/QK4rXnh/Screenshot-2021-11-20-at-10-31-24.png" alt="Screenshot-2021-11-20-at-10-31-24" border="0"></a>
+
+
 # Game Review Site
 GameReview is an online site/app designed to let user's find and review their favourite games. As well as look for other user's views on games they have a potential interest in playing.
 
@@ -41,15 +44,15 @@ Permanent Marker font / Press Start 2p will be used for the main branding for th
 ## Wireframes 
 ---
 
-[Small screens](static/wireframes/small-ms3.pdf)
+[Small screens](lib/static/wireframes/small-ms3.pdf)
 
-[Medium screens](static/wireframes/med-ms3.pdf)
+[Medium screens](lib/static/wireframes/med-ms3.pdf)
 
-[Large screens](static/wireframes/lrg-ms3.pdf)
+[Large screens](lib/static/wireframes/lrg-ms3.pdf)
 
 ## Data Structure
 ---
-[Data Structure](static/wireframes/data-structure.png)
+[Rough Data Structure](lib/static/wireframes/data-structure.png)
 
 ### Any updates made to the Wireframes?
 
@@ -89,15 +92,15 @@ Permanent Marker font / Press Start 2p will be used for the main branding for th
 
 - As a first time visitor I want to be able to easily register
 
-  i. 
+  i. Registration is straightforward and massages are flashed to help a user if they have for example not entered matching passwords.
 
 - As a first time visitor I want to be able to create my first review easily
 
-  i.
+  i. reviews are easily created (once logged in). Through the data accessed via the RawG api you can then post your review to the site.
 
-- As a first time visitor I want to be able to see top rated games
+- As a first time visitor I want to be able to see rated games
 
-  i. 
+  i. Reviews of games can be accessed regardless of being a registered user or not
 
 #### Returning visitor Goals
 - As a returning visitor I want to be able to update or edit a previous review
@@ -133,16 +136,44 @@ Permanent Marker font / Press Start 2p will be used for the main branding for th
 
 - Used the W3C Markup Validator and W3C CSS Validator to check every page of the project to ensure there were no syntax errors.
 
+### Validation Checks
+
+- [CSS](lib/static/validation/css.validator.png)
+
+- [Home/Games page](lib/static/validation/screenshot.games.png)
+- [Review page](lib/static/validation/screenshot.getreview.png)
+- [Register page](lib/static/validation/screenshot.register.png)
+- [Sign in page](lib/static/validation/screenshot.signin.png)
+- [Change password page](lib/static/validation/screenshot.changepass.png)
+- [Confirm delete account page](lib/static/validation/screenshot.delete.png)
+- [Edit Review page](lib/static/validation/screenshot.edit.png)
+
+
+
+
 ## Deployment
 ---
-### Github pages
+
+I deployed this site on heroku through github, below are the steps that i took;
+
+### Github 
 The project was deployed to Heroku using the following steps;
-1. Thi
-1. 
-1. 
-1. 
-1. 
-1. 
+1. Logged into my github accound and created a new workspace
+1. Using the Code Institute template i named my new project and created the repository
+1. using the method "pip3 freeze > requirements.txt" in the terminal you will create a requirements text file which heroku will need to deploy successfully"
+1. Before being able to deploy the app an initial commit must be made, see below example
+1. ```
+   cd myapp
+   git init
+   Initialized empty Git repository in .git/
+    git add .
+    git commit -m "My first commit"
+    Created initial commit 5df2d09: My first commit
+    44 files changed, 8393 insertions(+), 0 deletions(-)
+   create mode 100644 README
+   create mode 100644 Procfile
+   create mode 100644 app/controllers/source_file
+1. Any changes then have to be pushed to Github before Heroku can display the site in it's current state.
 
 ### Forking the GitHub Repository
 By forking the GitHub Repository we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original repository by using the following steps...
@@ -173,10 +204,17 @@ $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
 > Unpacking objects: 100% (10/10), done.
 ```
 
+### Heroku
+1. Once logged into Heroku click 'New' then 'Create New app.'
+1. Inside the settings you need to 'reveal config vars' and input these to match exactly the contents of your env file. This information needs to remain updated with any new sensitive information you are keeping hidden from the front end.
+1. You are given three deployment methods. I choose to use the second option which was through Github (you will need to connect your heroku to your personal github).
+1. From here it is just a case of finding the repository you wish to deploy and selecting the correct branch. 
+
 ## Credits
 ---
 
 ### Code 
+- All code
 
 ### Content
 
@@ -186,4 +224,4 @@ $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
 
 ### Acknowledgements
 - [Stack Overflow](https://stackoverflow.com/) was a great resource if i had any problems, often i could find the same or similar issue on here and get an idea for how to fix it.
-- My mentor helped me throughout
+- My mentor Narender helped me throughout the project and was always available if i needed advice.
