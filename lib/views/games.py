@@ -59,7 +59,7 @@ def get_games():
     except requests.exceptions.RequestException as request_exception:
         raise SystemExit from request_exception
 
-    return render_template("games.html", data=data, links=links)
+    return render_template("games.html", data=data)
 
 
 @blueprint.route("/search", methods=["GET", "POST"])

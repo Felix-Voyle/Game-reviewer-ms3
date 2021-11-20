@@ -224,28 +224,28 @@ nav .nav-wrapper {
     border-radius: 5px;
 }
 
-.PlayStation {
+.playstation {
     background-color: blue;
 }
-.Xbox {
+.xbox {
     background-color: green;
 }
-.Nintendo {
+.nintendo {
     background-color: red;
 }
-.PC {
+.pc {
     background-color: black;
 }
-.Linux {
+.linux {
     background-color: coral;
 }
-.macOS {
+.macos {
     background-color: purple;
 }
-.iOS {
+.ios {
     background-color: grey;
 }
-.Android {
+.android {
     background-color: #a4c639;
 }
 

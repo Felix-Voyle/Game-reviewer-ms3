@@ -25,7 +25,7 @@
         <span class="card-title">{{ game['name'] }}</span>
         <div class="card-info released-title">Released: <span class="released-info">{{ game['released'] }}</span></div>
         {% for platform in game['platforms'] %}
-        <span class="card-info platform-info {{ platform['platform']['name'] }}">{{ platform['platform']['name'] }}
+        <span class="card-info platform-info {{ platform['platform']['name']|lower }}">{{ platform['platform']['name'] }}
         </span>
         {% endfor %}
       </div>
