@@ -62,6 +62,8 @@ Permanent Marker font / Press Start 2p will be used for the main branding for th
 - Rather than a simple buy now link, a price comparison checker and affiliate links to a number of stores selling the game would serve both the customer and the site owner better.
 - The API I used didn't contain game information, however giving each individual game it's own page with more information and perhaps videos, would be more informative to users.
 
+- I have also realised too late it would have been a good idea to limit the ammount of user reviews rendered on the reviews page. This is beacuase this page will become increasingly slower as more reviews are added. This would have been easily implementable but I only thought of it last minute when carrying out testing on performance.
+
 ## Technologies used
 ----
 ### Languages used
@@ -105,24 +107,20 @@ Permanent Marker font / Press Start 2p will be used for the main branding for th
 #### Returning visitor Goals
 - As a returning visitor I want to be able to update or edit a previous review
 
-  i. 
+  i. Previous reviews can be updated either from the reviews page either by scrolling through or using the search functionality. Or they can also be updated from the user's own profile which lists all the user reviews.
 
 - As a returning visitor I want to be able to see other user’s reviews on new or older games
 
-  i. 
-
-- As a returning vistor I want to see if there are any new highly rated games
-
-  i.
+  i. All reviews can be seen on the reviews page and searched for using the search bar at the top for more specific results
 
 #### Frequent Vistor Goals
 - As a frequent visitor I want to be able to update previous reviews in line with games being updated and improved
 
-  i.
+  i. Previous reviews can be updated either from the reviews page either by scrolling through or using the search functionality. Or they can also be updated from the user's own profile which lists all the user reviews.
 
 - As a frequent visitor I want to be able to easily follow a link to highly rated game to purchase it
 
-  i. 
+  i. Buy links are available on every game from the home page. These link to amazon with the search querying the game name in the video games section of amazon.
 
 ### Further Testing
 
@@ -148,7 +146,16 @@ Permanent Marker font / Press Start 2p will be used for the main branding for th
 - [Confirm delete account page](lib/static/validation/screenshot.delete.png)
 - [Edit Review page](lib/static/validation/screenshot.edit.png)
 
+### Bugs and Fixes 
+- I originally started my project in another repository and was coding locally using VS code. This however led to many problems as i wasn't aware i would have to use a virtual enviroment when coding locally. This led to problems deploying with way too many requirements being needed. I had to more or less start from scratch using gitpods online code editor. Which I had no problems with moving forwards.
 
+- I originally tried to do a seperate for loop inside a for loop for my buttons as my game['name'] variable was throwing a HTML error when run through the validator. This didn't work however as i then ended up with 8 buttons on top of eachother. Therefore i used the Jinja in line functions to replace the blank space with a "+". 
+
+- Mainly the links from the "buy now" buttons do take the user to relevant results. However they aren't all consistent as if for example the game is on the app store it wont be purchaseable through amazon. At the least it does show other relevant things they could buy realting to the game though. 
+
+- I have also realised too late it would have been a good idea to limit the ammount of user reviews rendered on the reviews page. This is beacuase this page will become increasingly slower as more reviews are added. This would have been easily implementable but I only thought of it last minute when carrying out testing on performance.
+
+- I put my API call inside a try except statement so that the app would load even depsite an error being thrown. However i forgot to put a statement in informing the user. Realised too late before project submission.
 
 
 ## Deployment
@@ -214,9 +221,14 @@ $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
 ---
 
 ### Code 
-- All code
+- All code was written by the developer using the following documentation as an aid;
+  1. https://docs.python-requests.org/en/latest/
+  1. https://flask.palletsprojects.com/en/2.0.x/
+  1. https://jinja.palletsprojects.com/en/3.0.x/
+  1. https://werkzeug.palletsprojects.com/en/2.0.x/
 
 ### Content
+- All content was written by the developer
 
 ### Media 
 
@@ -225,3 +237,4 @@ $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
 ### Acknowledgements
 - [Stack Overflow](https://stackoverflow.com/) was a great resource if i had any problems, often i could find the same or similar issue on here and get an idea for how to fix it.
 - My mentor Narender helped me throughout the project and was always available if i needed advice.
+
