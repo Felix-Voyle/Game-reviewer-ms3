@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Press+Start+2P&family=Zen+Kurenaido&display=swap');
+
 html {
     margin: 0;
     padding: 0;
     background-color: #2f3437;
+    font-family: 'Zen Kurenaido', sans-serif;
 }
 
 textarea {
@@ -18,16 +21,20 @@ textarea {
 
 .brand-name-game {
     letter-spacing: 1.2px;
-    color: #ff7073;
 }
 
-.brand-name-r {
+.brand-name-game, .brand-name-r {
     color: #ff7073;
+    font-family: 'Press Start 2P', cursive;
+    position: relative;
+    bottom: -5px;
 }
 
 .brand-name-review {
     color: #28aee1;
     border: 2px solid lavenderblush;
+    font-family: 'Permanent Marker', cursive;
+    padding: 0 4px 0 2px;
 }
 
 nav .nav-wrapper {
@@ -74,7 +81,25 @@ nav .nav-wrapper {
     margin: 10px
 }
 
-/* game/home page */
+/* game & review */
+.card .card-title {
+    font-size: 18px;
+}
+
+.card .card-content .card-title {
+    background-color: black;
+}
+
+.card .card-content .card-title, .reviewed-by {
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    color: lavenderblush;
+}
+
+.reviewed-by {
+    background-color: #28aee1;
+}
 
 .game-img {
     width: 100%;
@@ -88,15 +113,11 @@ nav .nav-wrapper {
 }
 
 .card-content {
-    min-height: 150px;
+    min-height: 170px;
 }
 
-.card .card-content .card-title {
-    background-color: black;
-    width: fit-content;
-    padding: 5px;
-    border-radius: 5px;
-    color: lavenderblush;
+.card .card-action {
+    min-height: 45px;
 }
 
 .collapsible {
@@ -112,6 +133,22 @@ nav .nav-wrapper {
     padding-left: 0px;
     padding-right: 0px;
 }
+
+.card-collapsible-header {
+    padding: 0;
+}
+
+.search-bar {
+    background-color: #2f3437;
+}
+
+@media screen and (min-width: 1219px) {
+    .game-img {
+        height: 164px;
+    }
+}
+
+/* game/home page */
 
 .search-btn {
     position: absolute;
@@ -152,16 +189,22 @@ nav .nav-wrapper {
 .buy-btn {
     background-color: #ff7073;
     left: 50%;
-    top: -8px;
+    top: 170px;
+    z-index: 1;
 }
+
 .buy-btn:hover {
     cursor: pointer;
     background-color: #5a292a;
 }
 
+.buy-btn a {
+    color: lavenderblush;
+}
+
 .review-txt {
     width: 100%;
-    min-height: 50px;
+    min-height: 75px;
     height: fit-content;
     background-color: lavenderblush;
     padding: 1px 10px 1px 10px;
@@ -169,8 +212,41 @@ nav .nav-wrapper {
     border-radius: 4px;
 }
 
-.review-body {
-    padding-top: 0;
+.released-title {
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.platform-info {
+    margin-right: 4px;
+    padding: 1px;
+    border-radius: 5px;
+}
+
+.playstation {
+    background-color: blue;
+}
+.xbox {
+    background-color: green;
+}
+.nintendo {
+    background-color: red;
+}
+.pc {
+    background-color: black;
+}
+.linux {
+    background-color: coral;
+}
+.macos {
+    background-color: purple;
+}
+.ios {
+    background-color: grey;
+}
+.android {
+    background-color: #a4c639;
 }
 
 .hidden-input {
@@ -188,6 +264,11 @@ select {
 }
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
     color: white;
+}
+
+/* review page */
+.review-body {
+    padding-top: 0;
 }
 
 .rating-card-info {
@@ -221,6 +302,7 @@ select {
     bottom: -8px
 }
 
+/* edit */
 .edit-card {
     height: fit-content;
 }
@@ -243,19 +325,10 @@ select {
     font-size: 12px;
 }
 
+/* change password */
+
 .btn-yes, .btn-no {
     width: 150px;
     font-size: 12px;
     margin: 5px;
-}
-
-
-@media screen and (min-width: 1219px) {
-    .game-img {
-        height: 164px;
-    }
-}
-
-.search-bar {
-    background-color: #2f3437;
 }

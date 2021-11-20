@@ -13,16 +13,51 @@ blueprint = Blueprint("games", __name__, url_prefix="/games")
 API_KEY = os.environ.get("API_KEY")
 
 
+def insert_review():
+    '''adds review into db'''
+    review = {
+            "game_name": request.form.get("game_name"),
+            "game_rating": request.form.get("rating"),
+            "game_img": request.form.get("game_img"),
+            "user": session["user"],
+            "game_review": request.form.get("review")
+        }
+    db().reviews.insert_one(review)
+
+
+def check_review_exists():
+    '''checks if user reviewed already'''
+    already_reviewed = {
+            "game_name": request.form.get("game_name"),
+            "user": session["user"]
+        }
+    return db().reviews.find_one(already_reviewed)
+
+
+def edit_review_data():
+    '''data for editing review'''
+    edit = {
+            "game_name": request.form.get("game_name"),
+            "game_rating": request.form.get("rating"),
+            "game_img": request.form.get("game_img"),
+            "user": session["user"],
+            "game_review": request.form.get("review")
+        }
+    return edit
+
 
 @blueprint.route("/")
 def get_games():
     '''requests game data from api'''
     parameters = {
-        "page_size": 12
+        "page_size": 8
     }
-    response = requests.get(
-        f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
-    data = response.json()
+    try:
+        response = requests.get(
+            f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
+        data = response.json()
+    except requests.exceptions.RequestException as request_exception:
+        raise SystemExit from request_exception
 
     return render_template("games.html", data=data)
 
@@ -32,12 +67,15 @@ def search():
     '''Allows user to search games using the rawg API as the database'''
     query = request.form.get("query")
     parameters = {
-        "page_size": 12,
-        "search": f"{query}"
+        "page_size": 8,
+        "search": query
     }
-    response = requests.get(
-        f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
-    data = response.json()
+    try:
+        response = requests.get(
+            f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
+        data = response.json()
+    except requests.exceptions.RequestException as request_exception:
+        raise SystemExit from request_exception
 
     return render_template("games.html", data=data)
 
@@ -49,28 +87,26 @@ def get_reviews():
     return render_template("reviews.html", reviews=reviews)
 
 
+@blueprint.route("/search_reviews", methods=["GET", "POST"])
+def search_reviews():
+    '''Searches through user reviews'''
+    query = request.form.get("query")
+    reviews = list(db().reviews.find({"$text": {"$search": query}}))
+    if not reviews:
+        flash("Couldn't find any reviews to match your search", "error-msg")
+    return render_template("reviews.html", reviews=reviews)
+
+
 @blueprint.route("/add_review", methods=["GET", "POST"])
 def add_review():
     '''adds review to db'''
     if request.method == "POST":
-        already_reviewed = {
-            "game_name": request.form.get("game_name"),
-            "user": session["user"]
-        }
-    check_exists = db().reviews.find_one(already_reviewed)
-    if check_exists is None:
-        review = {
-            "game_name": request.form.get("game_name"),
-            "game_rating": request.form.get("rating"),
-            "game_img": request.form.get("game_img"),
-            "user": session["user"],
-            "game_review": request.form.get("review")
-        }
-        db().reviews.insert_one(review)
-        flash("Review added successfully", "success-msg")
-        return redirect(url_for("games.get_reviews"))
+        if check_review_exists() is None:
+            insert_review()
+            flash("Review added successfully", "success-msg")
+            return redirect(url_for("games.get_reviews"))
 
-    flash("You've Already reviewed this game", "error-msg")
+        flash("You've Already reviewed this game", "error-msg")
     return redirect(url_for("games.get_reviews"))
 
 
@@ -79,15 +115,7 @@ def edit_review(review_id):
     '''Finds review by id and edits it'''
     review = db().reviews.find_one({"_id": ObjectId(review_id)})
     if request.method == "POST":
-        edit = {
-            "game_name": request.form.get("game_name"),
-            "game_rating": request.form.get("rating"),
-            "game_img": request.form.get("game_img"),
-            "user": session["user"],
-            "game_review": request.form.get("review")
-        }
-
-        db().reviews.update({"_id": ObjectId(review_id)}, edit)
+        db().reviews.update({"_id": ObjectId(review_id)}, edit_review_data())
         flash("Review updated successfully", "success-msg")
         return redirect(url_for("games.get_reviews"))
 
