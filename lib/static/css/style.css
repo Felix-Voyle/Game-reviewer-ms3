@@ -30,6 +30,7 @@ textarea {
 .brand-name-game, .brand-name-r {
     color: #ff7073;
     font-family: 'Press Start 2P', cursive;
+    text-shadow: 4px 4px 3px black;
     position: relative;
     bottom: -5px;
 }
@@ -38,7 +39,8 @@ textarea {
     color: #28aee1;
     border: 2px solid lavenderblush;
     font-family: 'Permanent Marker', cursive;
-    padding: 0 4px 0 2px;
+    text-shadow: 2px 3px 0px black;
+    padding: 0 5px 0 2px;
 }
 
 nav .nav-wrapper {
@@ -92,6 +94,11 @@ nav .nav-wrapper {
 
 .card .card-content .card-title {
     background-color: black;
+}
+
+.card {
+    box-shadow: 8px 8px 9px black;
+    border: 2px solid #28aee1;
 }
 
 .card .card-content .card-title, .reviewed-by {
@@ -301,9 +308,32 @@ select {
 }
 .review-arrow {
     bottom: -11.5px;
+    color: whitesmoke;
 }
 .review-dropdwn {
-    bottom: -8px
+    bottom: -8px;
+    color: whitesmoke;
+}
+
+.dropdwn-btn {
+    bottom: 3px;
+    height: 2.5rem;
+    width: 2.5rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.dropdwn-btn-read {
+    background-color:#3e9b27;
+    border: 1px solid #3e9b27;
+}
+
+.dropdwn-btn-close {
+    background-color:#ff7073;
+    border: 1px solid #ff7073;
 }
 
 /* edit */
