@@ -56,6 +56,7 @@ def get_games():
         response = requests.get(
             f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
         data = response.json()
+        print(data)
     except requests.exceptions.RequestException as request_exception:
         raise SystemExit from request_exception
 
@@ -78,6 +79,19 @@ def search():
         raise SystemExit from request_exception
 
     return render_template("games.html", data=data)
+
+
+@blueprint.route("/<game_id>")
+def game(game_id):
+    '''gets individual game information'''
+    try:
+        response = requests.get(
+            f"https://api.rawg.io/api/games/{game_id}?key={API_KEY}")
+        game = response.json()
+    except requests.exceptions.RequestException as request_exception:
+        raise SystemExit from request_exception
+
+    return render_template("game.html", game=game)
 
 
 @blueprint.route("/get_reviews")
