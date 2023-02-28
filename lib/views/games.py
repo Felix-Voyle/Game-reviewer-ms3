@@ -1,5 +1,8 @@
 import os
 import requests
+import json
+import re
+from bs4 import BeautifulSoup
 from flask import (
     Flask, flash, render_template, Blueprint,
     redirect, request, session, url_for)
@@ -17,6 +20,7 @@ def insert_review():
     '''adds review into db'''
     review = {
             "game_name": request.form.get("game_name"),
+            "game_id": request.form.get("game_id"),
             "game_rating": request.form.get("rating"),
             "game_img": request.form.get("game_img"),
             "user": session["user"],
@@ -56,7 +60,6 @@ def get_games():
         response = requests.get(
             f"https://api.rawg.io/api/games?key={API_KEY}", params=parameters)
         data = response.json()
-        print(data)
     except requests.exceptions.RequestException as request_exception:
         raise SystemExit from request_exception
 
@@ -91,7 +94,12 @@ def game(game_id):
     except requests.exceptions.RequestException as request_exception:
         raise SystemExit from request_exception
 
-    return render_template("game.html", game=game)
+    htmlDescription = json.dumps(game['description'])
+    soup = BeautifulSoup(htmlDescription, 'html.parser')
+    description = soup.get_text()
+    # work out removing new line tags here
+
+    return render_template("game.html", game=game, description=description)
 
 
 @blueprint.route("/get_reviews")
