@@ -19,7 +19,7 @@
 {% for game in data['results'] %}
 <div class="row">
   <div class="col s12 offset-m1 m10">
-    <a href="{{ url_for('games.game', game_id=game['id']) }}"><div class="card blue-grey darken-1">
+    <a href="{{ url_for('games.game', game_id=game['id']) }}"><div class="card game-card blue-grey darken-1">
       <div class="card-content white-text">
         <img class="game-img" src='{{ game["background_image"] }}' alt="{{ game['name'] }} cover art">
         <span class="card-title">{{ game['name'] }}</span>
