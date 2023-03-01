@@ -18,6 +18,13 @@
             <p>{{ description }}</p>
         </div>
     </div>
+    <div class="col s12 m6">
+        <div class="card-panel teal">
+            {% for platform in game['platforms'] %}
+            <p>{{ platform.platform.name }}</p>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 
-{% endblock %}
+{% endblock %} 

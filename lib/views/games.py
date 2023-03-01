@@ -94,12 +94,23 @@ def game(game_id):
     except requests.exceptions.RequestException as request_exception:
         raise SystemExit from request_exception
 
+    total = 0
+    game_id = str(game['id'])
+    reviews = db().reviews.find(
+        {'game_id': game_id}, {'_id': 0, 'game_rating': 1})
+    count = reviews.count()
+    for review in reviews:
+        total += int(review['game_rating'])
+    average = round(total / count, 1)
+    print(average)
+
     htmlDescription = json.dumps(game['description'])
     soup = BeautifulSoup(htmlDescription, 'html.parser')
     description = soup.get_text()
     # work out removing new line tags here
 
-    return render_template("game.html", game=game, description=description)
+    return render_template(
+        "game.html", game=game, description=description, average=average)
 
 
 @blueprint.route("/get_reviews")
