@@ -1,7 +1,6 @@
 import os
 import requests
 import json
-import re
 from bs4 import BeautifulSoup
 from flask import (
     Flask, flash, render_template, Blueprint,
@@ -107,7 +106,9 @@ def game(game_id):
     htmlDescription = json.dumps(game['description'])
     soup = BeautifulSoup(htmlDescription, 'html.parser')
     description = soup.get_text()
-    # work out removing new line tags here
+
+    # doesn't work
+    # clean = description.replace("\n", "")
 
     return render_template(
         "game.html", game=game, description=description, average=average)
